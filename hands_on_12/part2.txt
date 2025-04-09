@@ -1,0 +1,26 @@
+a) Aggregate Method
+
+With the aggregate method, analyze the total cost of n operations and divide by n.
+
+For insertion into a dynamic table:
+- The resizing happens when the table size is 1, 2, 4, 8, ..., 2^k
+- Each resize costs O(i) where i is the current number of elements
+- Total cost for n insertions = n (basic insertions) + 1 + 2 + 4 + 8 + ... + n/2 (resizing costs)
+- The sum 1 + 2 + 4 + ... + n/2 is bounded by 2n for a geometric series with ratio 2
+- Total cost = n + O(n) = O(n)
+
+Therefore, the amortized cost per operation is O(n)/n = O(1).
+
+b) Accounting Method
+
+For the accounting method, we assign a charge to each operation:
+- Charge 3 units per insertion (this is our amortized cost)
+- Use 1 unit for the actual insertion
+- Bank 2 units as credit on the element
+
+When table doubling occurs:
+- We need to move i elements at a cost of i
+- We have 2i units of stored credit (2 units × i elements)
+- The stored credit covers the cost of copying
+
+The amortized cost per insertion is O(1).
